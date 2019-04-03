@@ -3,8 +3,6 @@
 #include "functions.cpp"
 
 
-
-
 int main (int argc, char** argv) {
   Grammar G;
   char *x ,* p = (char *) malloc(sizeof(char)*5);
