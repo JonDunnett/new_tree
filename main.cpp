@@ -6,6 +6,11 @@
 int main (int argc, char** argv) {
   Grammar G;
 
+  read_grammar(argv[3],G);
+  FILE * fp = fopen(argv[1],"w");
+  fprintf(fp,"%s",G['S']);
+  fclose(fp);
+
   int swi=0,tch=1;
   for(short i=0;i<10;i++) {
     next_gen(argv[swi+1],argv[tch+1],G);
