@@ -1,21 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <map>
-#include "functions.cpp"
 
-int how_many(FILE* fp);
-char* read(char * filename);
-int write(char * filename, char * data) ;
 
+// MAP Declaration
 typedef map<char, char*> Grammar;
 
-class tree {
-  Grammar G;
+// FUNCTIONS ----------------------------
+// Declarations
+int how_many(FILE* fp);
+char* read(char * filename);
+int write(char * filename, char * data);
 
-public:
-  void read_grammar(char * filename);
-};
 
+// Prototypes
 int how_many(FILE* fp) {
   fseek(fp, 0L, SEEK_END);
   int sz = ftell(fp);
@@ -47,11 +42,20 @@ int write(char * filename, char * data) {
 }
 
 
+void next_gen(char* infile, char*outfile, Grammar &G) {
+  FILE* ifp = fopen(infile, "r");
+  FILE* ofp = fopen(outfile, "w");
+  int i, c, len = how_many(ifp);
+  for (i=0;i<len;i++) {
+    fscanf(ifp,"%c", &c);
+    if (c < 91 && c > 64) {
+      // capital letter
+      fprintf(ofp, "%s", )
+    }
+  }
 
 
-int main (int argc, char** argv) {
-  Tree T;
-  T.read_grammar(argv[1]);
-  char * data;
-  return 0;
+
+  fclose(ifp);
+  fclose(ofp);
 }
