@@ -9,9 +9,9 @@ int main (int argc, char** argv) {
   read_grammar(argv[3],G);
   FILE * fp = fopen(argv[1],"w");
   fprintf(fp,"%s",G['S'].c_str());
-  printf("%s\n",G['S'].c_str());
-  printf("%s\n",G['B'].c_str());
-  printf("%s\n",G['A'].c_str());
+  //printf("%s\n",G['S'].c_str());
+  //printf("%s\n",G['B'].c_str());
+  //printf("%s\n",G['A'].c_str());
   fclose(fp);
 
   int swi=0,tch=1;
