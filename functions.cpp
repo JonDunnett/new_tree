@@ -23,8 +23,8 @@ int how_many(FILE* fp) {
 
 void read_grammar(char * infile, Grammar &G) {
   FILE* ifp = fopen(infile,"r");
-  char c, *;
-  std::string prod;
+  char c;
+  std::string prod(20,'\0');
   int a,l,w, done=0;
   fscanf(ifp,"a:%d\n",&a);
   fscanf(ifp,"l:%d\n",&l);
@@ -41,7 +41,7 @@ void read_grammar(char * infile, Grammar &G) {
         done+=1;
       } else {
         printf("%d",4);
-        fscanf(ifp,":%s\n", prod);
+        fscanf(ifp,":%s\n", prod.data());
         G[c]=prod;
       }
     }
