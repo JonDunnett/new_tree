@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 // MAP Declaration
-typedef map<char, char*> Grammar;
+typedef std::map<char, char*> Grammar;
 
 // FUNCTIONS ----------------------------
 // Declarations
