@@ -14,7 +14,7 @@ int main (int argc, char** argv) {
     next_gen(argv[swi+1],argv[tch+1],G);
     swi = 1-swi;
     tch = 1-tch;
-    printf("%s","ig?"")
+    printf("%s","ig?");
     y=getchar();
   }
 
