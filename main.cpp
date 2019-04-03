@@ -9,11 +9,13 @@ int main (int argc, char** argv) {
   x=p;
   *x++='p';
   *x++='C';
+  *x++='C';
+  *x++='C';
   *x='\0';
 
   G['C']=p;
   int swi=0,tch=1;
-  for(short i=0;i<100;i++) {
+  for(short i=0;i<10000;i++) {
     next_gen(argv[swi+1],argv[tch+1],G);
     swi=1-swi;tch=1-tch;
   }
