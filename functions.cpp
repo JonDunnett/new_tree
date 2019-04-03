@@ -39,7 +39,7 @@ void read_grammar(char * infile, Grammar &G) {
       } else {
         fscanf(ifp,":%s\n", temp);
         printf("%s\n",temp);
-        prod = *temp;
+        prod = string(temp);
         G[c]=prod;
       }
     }
