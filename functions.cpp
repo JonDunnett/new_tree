@@ -1,4 +1,6 @@
-
+#include <map>
+#include <stdio.h>
+#include <stdlib.h>
 
 // MAP Declaration
 typedef map<char, char*> Grammar;
