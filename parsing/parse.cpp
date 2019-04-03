@@ -1,7 +1,7 @@
 // Parse.cpp
-#include "Shapes.h"
-#include "Tree.h"
-#include "Matrix.h"
+#include "shapes.h"
+//#include "Tree.h"
+#include "matrix.h"
 #include <stack>
 #include <iostream>
 #include <stdlib.h>

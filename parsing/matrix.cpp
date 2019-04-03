@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <assert.h>
-#include "Shapes.h"
-#include "Matrix.h"
+#include "shapes.h"
+#include "matrix.h"
 #include <math.h>
 using namespace std;
 
