@@ -21,8 +21,8 @@ int how_many(FILE* fp) {
 
 void read_grammar(char * infile, Grammar &G) {
   FILE* ifp = fopen(infile,"r");
-  char c, *temp = (char*) malloc(sizeof(char)*20);
-  std::string prod(20,'\0');
+  char c, *temp = (char*) malloc(sizeof(char)*50);
+  std::string prod;
   int a,l,w, done=0;
   fscanf(ifp,"a:%d\n",&a);
   fscanf(ifp,"l:%d\n",&l);
