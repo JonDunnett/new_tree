@@ -38,6 +38,7 @@ void read_grammar(char * infile, Grammar &G) {
         done+=1;
       } else {
         fscanf(ifp,":%s\n", temp);
+        printf("%s\n",temp);
         prod = *temp;
         G[c]=prod;
       }
