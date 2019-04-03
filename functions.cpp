@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-#include <vector>
-#include <cstdlib>
 // MAP Declaration
 typedef std::map<char, std::string> Grammar;
 
@@ -13,7 +11,6 @@ int how_many(FILE* fp);
 void read_grammar(char * infile, Grammar &G);
 void next_gen(char* infile, char* outfile, Grammar &G);
 void end_gen(char* infile, char* outfile);
-std::string rand_rule(std::string rule);
 // Prototypes
 int how_many(FILE* fp) {
   fseek(fp, 0L, SEEK_END);
@@ -96,23 +93,4 @@ void end_gen(char* infile, char* outfile) {
   }
   fclose(ifp);
   fclose(ofp);
-}
-
-std::string rand_rule(std::string rule) {
-	std::vector<std::string> temp_vect;
-	int index,j=0;
-	std::string temp_str="";
-	for(short i=0;i<rule.length();i++){
-		if (rule[i] != '|') {
-			temp_str= temp_str + rule[i];
-		} else {
-			temp_vect.push_back(temp_str);
-			j++;
-			temp_str="";
-		}
-	}
-	temp_vect.push_back(temp_str);
-	index = rand() % ++j;
-
-	return temp_vect[index];
 }
