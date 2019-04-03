@@ -9,6 +9,7 @@ int main (int argc, char** argv) {
   read_grammar(argv[3],G);
   FILE * fp = fopen(argv[1],"w");
   fprintf(fp,"%s",G['S']);
+  printf("%s",G['S']);
   fclose(fp);
 
   int swi=0,tch=1;
