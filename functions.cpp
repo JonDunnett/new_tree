@@ -82,6 +82,7 @@ void end_gen(char* infile, char* outfile,Grammar &G) {
       fprintf(ofp, "%c", c);
     }
   }
+  fprintf("%c",";");
   fclose(ifp);
   fclose(ofp);
 }
