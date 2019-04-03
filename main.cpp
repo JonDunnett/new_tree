@@ -5,16 +5,17 @@
 
 int main (int argc, char** argv) {
   Grammar G;
-  char *x ,* p = (char *) malloc(sizeof(char)*5);
-  x = p;
-  *x++ = 'h';
-  *x++ = 'e';
-  *x++ = 'y';
-  *x++ = '\0';
-  G['C'] =  p;
+  char y,*x ,* p = (char *) malloc(sizeof(char)*10);
 
-  next_gen(".tmp1",".tmp2",G);
+  printf("%s","iterate generation? [y=yes]");
+  y=getchar();
+  int swi=0,tch=1;
+  while (y!='y') {
+    next_gen(argv[swi+1],argv[tch+1],G);
+    swi = 1-swi;
+    tch = 1-tch;
+  }
+
   free(p);
-
   return 0;
 }

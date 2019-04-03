@@ -51,7 +51,6 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
   char c;
   for (i=0;i<len;i++) {
     fscanf(ifp,"%c", &c);
-    printf("%d,",c);
     if (c < 91 && c > 64) {
       // capital letter
       fprintf(ofp, "%s", G[c]);
@@ -65,7 +64,6 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
       // other aka bad input
     }
   }
-  printf("%s\n","");
   fclose(ifp);
   fclose(ofp);
 }
