@@ -61,7 +61,6 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
       fprintf(ofp, "%c", c);
     } else {
       // other aka bad input
-      fprintf(ofp, "%c", c);
     }
   }
   fclose(ifp);
