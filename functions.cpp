@@ -54,7 +54,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      fprintf(ofp, "%s", rand_rule(G[c]).c_str());
+      fprintf(ofp, "%s", G[c].c_str());
     } else if (c > 47 && c < 58) {
       // numerical character
       fprintf(ofp, "%c", c);
