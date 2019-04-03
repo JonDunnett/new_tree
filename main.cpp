@@ -13,7 +13,7 @@ int main (int argc, char** argv) {
   *x++ = '\0';
   G['C'] =  p;
 
-  next_gen(".tmp3",".tmp2",G);
+  next_gen(".tmp1",".tmp2",G);
   free(p);
 
   return 0;

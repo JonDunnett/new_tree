@@ -47,7 +47,8 @@ int write(char * filename, char * data) {
 void next_gen(char* infile, char*outfile, Grammar &G) {
   FILE* ifp = fopen(infile, "r");
   FILE* ofp = fopen(outfile, "w");
-  int i, c, len = how_many(ifp);
+  int i, len = how_many(ifp);
+  char c;
   for (i=0;i<len;i++) {
     fscanf(ifp,"%c", &c);
     printf("%d,",c);
