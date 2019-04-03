@@ -10,10 +10,12 @@ int main (int argc, char** argv) {
   printf("%s","iterate generation? [y=yes]");
   y=getchar();
   int swi=0,tch=1;
-  while (y!='y') {
+  while (y=='y') {
     next_gen(argv[swi+1],argv[tch+1],G);
     swi = 1-swi;
     tch = 1-tch;
+    printf("%s","ig?"")
+    y=getchar();
   }
 
   free(p);
