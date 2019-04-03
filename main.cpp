@@ -15,7 +15,7 @@ int main (int argc, char** argv) {
   fclose(fp);
 
   int swi=0,tch=1;
-  for(short i=0;i<10;i++) {
+  for(short i=0;i<100;i++) {
     next_gen(argv[swi+1],argv[tch+1],G);
     swi=1-swi;tch=1-tch;
   } // swi is final output
