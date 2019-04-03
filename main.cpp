@@ -7,17 +7,7 @@ int main (int argc, char** argv) {
   Grammar G;
   char y,*x ,* p = (char *) malloc(sizeof(char)*10);
 
-  printf("input: %s; output: %s",argv[1],argv[2]);
-  printf("%s","iterate generation? [y=yes]");
-  y=getchar();
-  int swi=0,tch=1;
-  while (y=='y') {
-    next_gen(argv[swi+1],argv[tch+1],G);
-    swi = 1-swi;
-    tch = 1-tch;
-    printf("%s","ig?");
-    y=getchar();
-  }
+  next_gen(argv[1],argv[2],G);
 
   free(p);
   return 0;
