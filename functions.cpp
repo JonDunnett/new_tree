@@ -48,13 +48,14 @@ void read_grammar(char * infile, Grammar &G) {
 void next_gen(char* infile, char*outfile, Grammar &G) {
   FILE* ifp = fopen(infile, "r");
   FILE* ofp = fopen(outfile, "w");
-  int i, len = how_many(ifp);
+  int i, alt=0,len = how_many(ifp);
   char c;
   for (i=0;i<len;i++) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      fprintf(ofp, "%s", G[c].c_str());
+      if (c=='X') {fprintf(ofp, "%s", (G[c][alt]).c_str()); alt=1-alt;}
+      else {fprintf(ofp, "%s", G[c].c_str());}
     }  else {
       // other aka bad input
       fprintf(ofp, "%c", c);
