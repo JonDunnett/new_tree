@@ -64,7 +64,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
   fclose(ofp);
 }
 
-void end_gen(char* infile, char* outfile) {
+void end_gen(char* infile, char* outfile,Grammar &G) {
   FILE* ifp = fopen(infile, "r");
   FILE* ofp = fopen(outfile, "w");
   int i, len = how_many(ifp);
