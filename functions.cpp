@@ -28,15 +28,19 @@ void read_grammar(char * infile, Grammar &G) {
   fscanf(ifp,"l:%d\n",&l);
   fscanf(ifp,"w:%d\n",&w);
   fscanf(ifp,"%c\n",&c);
+  printf("%d",1);
   if (c=='{') {
+    printf("%d",2);
     while (!done){
+      printf("%d",3);
       fscanf(ifp,"%c",&c);
       if (c=='}') {
+        printf("%d",5);
         done+=1;
       } else {
+        printf("%d",4);
         fscanf(ifp,":%s", prod);
         G[c]=prod;
-        printf("%s",prod);
         prod = (char*) malloc(sizeof(char)*20);
       }
     }
