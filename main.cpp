@@ -20,7 +20,7 @@ int main (int argc, char** argv) {
     swi=1-swi;tch=1-tch;
   } // swi is final output
 
-  end_gen(argv[swi+1],"final.txt");
+  end_gen(argv[swi+1],"final.txt", G);
 
   return 0;
 }
