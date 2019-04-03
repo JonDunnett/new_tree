@@ -5,8 +5,6 @@
 
 int main (int argc, char** argv) {
   Grammar G;
-  int c = 'A';
-  printf("%d",c);
   char *x ,* p = (char *) malloc(sizeof(char)*5);
   x = p;
   *x++ = 'h';
