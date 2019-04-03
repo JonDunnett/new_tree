@@ -8,7 +8,7 @@ typedef map<char, char*> Grammar;
 int how_many(FILE* fp);
 char* read(char * filename);
 int write(char * filename, char * data);
-
+void next_gen(char* infile, char*outfile, Grammar &G);
 
 // Prototypes
 int how_many(FILE* fp) {
@@ -50,12 +50,18 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      fprintf(ofp, "%s", )
+      fprintf(ofp, "%s", G[c]);
+    } else if (c > 47 && c < 58) {
+      // numerical character
+      fprintf(ofp, "%c", c);
+    } else if (c > 96 && c < 123) {
+      // lower case letter
+      fprintf(ofp, "%c", c);
+    } else {
+      // other aka bad input
+      printf("%s", "Bad input");
     }
   }
-
-
-
   fclose(ifp);
   fclose(ofp);
 }
