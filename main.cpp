@@ -9,6 +9,8 @@ int main (int argc, char** argv) {
   x=p;
   *x++='p';
   *x++='C';
+  *x++='C';
+  *x++='p';
   *x='\0';
 
   G['C']=p;
