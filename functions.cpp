@@ -55,13 +55,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
     if (c < 91 && c > 64) {
       // capital letter
       fprintf(ofp, "%s", G[c].c_str());
-    } else if (c > 47 && c < 58) {
-      // numerical character
-      fprintf(ofp, "%c", c);
-    } else if (c > 96 && c < 123) {
-      // lower case letter
-      fprintf(ofp, "%c", c);
-    } else {
+    }  else {
       // other aka bad input
       fprintf(ofp, "%c", c);
     }
@@ -79,15 +73,11 @@ void end_gen(char* infile, char* outfile) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      // fprintf(ofp, "%s", G[c]);
-    } else if (c > 47 && c < 58) {
-      // numerical character
-      fprintf(ofp, "%c", c);
-    } else if (c > 96 && c < 123) {
-      // lower case letter
-      fprintf(ofp, "%c", c);
+      if (G[c].length() == 1){
+        fprintf(ofp, "%s", G[c].c_str());
+      }
     } else {
-      // other aka bad input
+      // other
       fprintf(ofp, "%c", c);
     }
   }
