@@ -36,6 +36,7 @@ void read_grammar(char * infile, Grammar &G) {
       } else {
         fscanf(ifp,":%s", prod);
         G[c]=prod;
+        prod = (char*) malloc(sizeof(char)*20);
       }
     }
   }
