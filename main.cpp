@@ -5,20 +5,27 @@
 
 int main (int argc, char** argv) {
   Grammar G;
-  char y,*x ,* p = (char *) malloc(sizeof(char)*10);
-  x=p;
-  *x++='p';
-  *x++='C';
-  *x++='C';
-  *x++='p';
-  *x='\0';
 
-  G['C']=p;
   int swi=0,tch=1;
   for(short i=0;i<10;i++) {
     next_gen(argv[swi+1],argv[tch+1],G);
     swi=1-swi;tch=1-tch;
   } // swi is final output
+
+  end_gen(argv[swi+1],"final.txt");
+
   free(p);
   return 0;
 }
+
+/*
+char y,*x ,* p = (char *) malloc(sizeof(char)*10);
+x=p;
+*x++='p';
+*x++='C';
+*x++='C';
+*x++='p';
+*x='\0';
+
+G['C']=p;
+*/
