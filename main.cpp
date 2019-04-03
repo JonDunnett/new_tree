@@ -19,7 +19,6 @@ int main (int argc, char** argv) {
 
   end_gen(argv[swi+1],"final.txt");
 
-  free(p);
   return 0;
 }
 
