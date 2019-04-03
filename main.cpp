@@ -10,6 +10,8 @@ int main (int argc, char** argv) {
   FILE * fp = fopen(argv[1],"w");
   fprintf(fp,"%s",G['S']);
   printf("%s",G['S']);
+  printf("%s",G['B']);
+  printf("%s",G['A']);
   fclose(fp);
 
   int swi=0,tch=1;
