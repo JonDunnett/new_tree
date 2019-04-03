@@ -54,7 +54,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      if (c=='X') {fprintf(ofp, "%s", (G[c][alt]).c_str()); alt=1-alt;}
+      if (c=='X') {fprintf(ofp, "%c", G[c][alt]; alt=1-alt;}
       else {fprintf(ofp, "%s", G[c].c_str());}
     }  else {
       // other aka bad input
