@@ -28,6 +28,7 @@ void read_grammar(char * infile, Grammar &G) {
   fscanf(ifp,"l:%d\n",&l);
   fscanf(ifp,"w:%d\n",&w);
   fscanf(ifp,"%c\n",&c);
+  printf("%c",c);
   if (c=='{') {
     while (!done){
       fscanf(ifp,"%c",&c);
