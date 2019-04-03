@@ -1,9 +1,10 @@
 #include <map>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
 
 // MAP Declaration
-typedef std::map<char, char*> Grammar;
+typedef std::map<char, std::string> Grammar;
 
 // FUNCTIONS ----------------------------
 // Declarations
@@ -22,7 +23,8 @@ int how_many(FILE* fp) {
 
 void read_grammar(char * infile, Grammar &G) {
   FILE* ifp = fopen(infile,"r");
-  char c, *prod = (char*) malloc(sizeof(char)*20);
+  char c, *;
+  std::string prod;
   int a,l,w, done=0;
   fscanf(ifp,"a:%d\n",&a);
   fscanf(ifp,"l:%d\n",&l);
@@ -41,7 +43,6 @@ void read_grammar(char * infile, Grammar &G) {
         printf("%d",4);
         fscanf(ifp,":%s\n", prod);
         G[c]=prod;
-        prod = (char*) malloc(sizeof(char)*20);
       }
     }
   }
@@ -58,7 +59,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      fprintf(ofp, "%s", G[c]);
+      fprintf(ofp, "%s", G[c].c_str());
     } else if (c > 47 && c < 58) {
       // numerical character
       fprintf(ofp, "%c", c);
