@@ -99,7 +99,7 @@ void end_gen(char* infile, char* outfile) {
 }
 
 std::string rand_rule(std::string rule) {
-	std::vector<string> temp_vect;
+	std::vector<std::string> temp_vect;
 	int index,j=0;
 	std::string temp_str="";
 	for(short i=0;i<rule.length();i++){
