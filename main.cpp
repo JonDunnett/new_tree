@@ -8,16 +8,15 @@ int main (int argc, char** argv) {
   char y,*x ,* p = (char *) malloc(sizeof(char)*10);
   x=p;
   *x++='p';
+  *x++='C';
   *x='\0';
 
   G['C']=p;
-
-
-  printf("input: %s\n",argv[1]);
-  printf("input: %s\n",argv[2]);
-
-  next_gen(argv[1],argv[2],G);
-
+  int swi=0,tch=1;
+  for(short i=0;i<100;i++) {
+    next_gen(argv[swi+1],argv[tch+1],G);
+    swi=1-swi;tch=1-tch;
+  }
   free(p);
   return 0;
 }
