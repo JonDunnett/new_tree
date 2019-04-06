@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <stack>
 // MAP Declaration
 typedef std::map<char, std::string> Grammar;
 
@@ -11,6 +12,8 @@ int how_many(FILE* fp);
 void read_grammar(char * infile, Grammar &G);
 void next_gen(char* infile, char* outfile, Grammar &G);
 void end_gen(char* infile, char* outfile);
+std::string select_rule(std::string line);
+
 // Prototypes
 int how_many(FILE* fp) {
   fseek(fp, 0L, SEEK_END);
@@ -85,4 +88,21 @@ void end_gen(char* infile, char* outfile,Grammar &G) {
   fprintf(ofp,"%c",';');
   fclose(ifp);
   fclose(ofp);
+}
+
+std::string select_rule(std::string line) {
+    if (line.find('|')+1) {
+      std::string* strs = new string [5];
+      int i,j=0;
+      for (i=0;i<line.length();i++) {
+        if (line[i]!='|') {
+          strs[j]+=line[i];
+        } else {
+          j++;
+        }
+      }
+      return *strs[rand() % j];
+    } else {
+      return line;
+    }
 }
