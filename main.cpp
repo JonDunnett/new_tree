@@ -30,6 +30,15 @@ int main (int argc, char** argv) {
   Matrix PLUS = 0; // translation for a branch off to the right
   Matrix MINU = 0; // translation for a branch off to the left
 
+  /* TRANSLATION MATRIX FORM
+  [
+    [cos(theta),-sin(theta), dx],
+    [sin(theta), cos(theta), dy],
+    [     0    ,     0     ,  1]
+  ]
+  */
+
+  
   do {
     fscanf(fp,"%c",&c);
     if (c=='[') {
@@ -46,8 +55,8 @@ int main (int argc, char** argv) {
       // 6) add +/- matrix to stack  => matrices.push_back(Matrix(PLUS))
       //    add a copy of plus or minus to the stack
     } else if (c==']') {
-      // pop branch 
-      matrices.pop()
+      // pop branch
+      matrices.pop();
     }
   } while (c!=';');
 
