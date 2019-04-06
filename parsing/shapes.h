@@ -1,7 +1,7 @@
 #ifndef _SHAPES
 #define _SHAPES
 
-#include "Matrix.h"
+#include "matrix.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -35,7 +35,7 @@ public:
 	Triangle* triangulateL();
 	Triangle* triangulateU();
 	void set_origin(vector<float>&p, float draw_angle);
-	float get_length(); 
+	float get_length();
 	float get_width();
 };
 
