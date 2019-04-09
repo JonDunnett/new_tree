@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "functions.cpp"
+#include "classes.cpp"
 
 
 int main (int argc, char** argv) {
-  srand(0/*(unsigned int*) malloc(sizeof(unsigned int))*/);
+  srand(0);
   Grammar G;
 
   read_grammar(argv[3],G);
