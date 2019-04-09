@@ -26,10 +26,7 @@ void read_grammar(char * infile, Grammar &G) {
   FILE* ifp = fopen(infile,"r");
   char c, *temp = (char*) malloc(sizeof(char)*50);
   std::string prod;
-  int a,l,w, done=0;
-  fscanf(ifp,"a:%d\n",&a);
-  fscanf(ifp,"l:%d\n",&l);
-  fscanf(ifp,"w:%d\n",&w);
+  int done=0;
   fscanf(ifp,"%c\n",&c);
   if (c=='{') {
     while (!done){
