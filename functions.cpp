@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string>
 #include <stack>
+
+#ifndef _FUNCTIONS
+#define _FUNCTIONS
 // MAP Declaration
 typedef std::map<char, std::string> Grammar;
 
@@ -16,6 +19,11 @@ std::string select_rule(std::string line);
 
 // Prototypes
 int how_many(FILE* fp) {
+// Counts the number of characters in the given file
+// PRE : An initialized file pointer in read mode; must point to beginning of an
+//       existing file
+// POST: Returns integer number of characters in the file; fp returned to
+//       beginning of file
   fseek(fp, 0L, SEEK_END);
   int sz = ftell(fp);
   rewind(fp);
@@ -23,6 +31,9 @@ int how_many(FILE* fp) {
 }
 
 void read_grammar(char * infile, Grammar &G) {
+// Parses grammar file and adds rules to Grammar map
+// PRE : Instantiated empty grammar map; file containing grammar definition
+// POST: File opened and closed; grammar map initialized with rules
   FILE* ifp = fopen(infile,"r");
   char c, *temp = (char*) malloc(sizeof(char)*50);
   std::string prod;
@@ -46,6 +57,10 @@ void read_grammar(char * infile, Grammar &G) {
 }
 
 void next_gen(char* infile, char*outfile, Grammar &G) {
+// iterate generation as specified by grammar
+// PRE : existing infile; initialized Grammar
+// POST: infile parsed; rules defined by grammar iterated one generation and
+//       output to outfile
   FILE* ifp = fopen(infile, "r");
   FILE* ofp = fopen(outfile, "w");
   int i, alt=0,len = how_many(ifp);
@@ -66,6 +81,10 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
 }
 
 void end_gen(char* infile, char* outfile,Grammar &G) {
+// clear non-terminals for final output
+// PRE : existing infile; initialized Grammar
+// POST: infile parsed; non-terminals with single character terminal production
+//       iterated one generation; other non-terminals removed; output to outfile
   FILE* ifp = fopen(infile, "r");
   FILE* ofp = fopen(outfile, "w");
   int i, len = how_many(ifp);
@@ -74,7 +93,7 @@ void end_gen(char* infile, char* outfile,Grammar &G) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      if (G[c].length() == 1){
+      if (select_rule(G[c]).length() == 1){
         fprintf(ofp, "%s", select_rule(G[c]).c_str());
       }
     } else {
@@ -88,6 +107,10 @@ void end_gen(char* infile, char* outfile,Grammar &G) {
 }
 
 std::string select_rule(std::string line) {
+// selects a single production from string with multiple possibilities delimited
+// by the '|' character
+// PRE : existing string holding all possible productions (may only be one)
+// POST: returns a string holding a random single production
     if (line.find('|')+1) {
       std::string* strs = new std::string [5];
       int i=0,j=0;
@@ -103,3 +126,6 @@ std::string select_rule(std::string line) {
       return line;
     }
 }
+
+
+#endif 

@@ -1,3 +1,5 @@
+#ifndef _CLASSES
+#define _CLASSES
 
 struct  matrix_size {
   int rows;
@@ -5,31 +7,47 @@ struct  matrix_size {
 };
 
 class Matrix {
-  float* data;
-  matrix_size size;
-  void mem_alloc(void);
+  float** data;          // holds the values inside the matrix
+  matrix_size size;      // struct containing the numer of rows and cols in matrix
+  void mem_alloc(void);  // allocates memory for data
+  void identity(void);   // sets this matrix to be identity matrix
 public:
-  Matrix()=0; // ctor but like don't use this
-  Matrix(int rows, int cols); // ctor defining # of rows/ cols
-  Matrix(matrix_size size);
-  Matrix(const Matrix& copy); // copy ctor
-  Matrix* operator*(const Matrix& other);
-  matrix_size get_size(void);
+  Matrix()=0;                             // ctor but like don't use this
+  Matrix(int rows, int cols);             // ctor defining # of rows/ cols
+  Matrix(matrix_size size);               // ctor defining # of rows/ cols
+  Matrix(const Matrix& copy);             // copy ctor
+  ~Matrix();                              // default dtor
+  Matrix* operator*(const Matrix& other); // operator overload matrix multiplication
+  matrix_size get_size(void);             // gets matrix_size struct
+  float get_value(int row, int col);      // get value at location
+
 };
 
 Matrix::Matrix(int rows, int cols) {
+// CTOR
+// PRE : Two ints representing the number of rows and columns respectively
+// POST: This matrix will have memory allocated and set to the identity matrix
+//       of the given size
   this->size.rows = rows;
   this->size.cols = cols;
   mem_alloc();
+  this->identity();
 }
 
 Matrix::Matrix(matrix_size in_size) {
+// CTOR
+// PRE : A matrix_size struct with initialized integer values
+// POST: This matrix will be set to the identity matrix of the given size
   this->size.rows = in_size.rows;
   this->size.cols = in_size.cols;
   mem_alloc();
+  this->identity();
 }
 
 Matrix::Matrix(const Matrix& copy) {
+// Copy ctor
+// PRE : An existing matrix; MUST have values
+// POST: This matrix will be a copy of given matrix
   matrix_size copy_size = copy.get_size()
   this->size.rows = copy_size.rows;
   this->size.cols = copy_size.rows;
@@ -38,13 +56,23 @@ Matrix::Matrix(const Matrix& copy) {
 }
 
 void Matrix::mem_alloc(void) {
-
+  // allocating memory for the values
+  // PRE : This matrix_size struct must be initialized with row and col values
+  // POST: Memory will be allocated based on the values in matrix_size struct
+  data = (float**) malloc(sizeof(float)*)
 }
 
 Matrix* Matrix::operator*(const Matrix& other) {
-
+// operator overload for matrix multiplication
+// PRE :
+// POST:
 }
 
 matrix_size Matrix::get_size(void) {
-
+// gets this matrix's matrix_size struct
+// PRE : matrix_size struct must be initialized with the size of the matrix
+// POST: Returns matrix_size struct
 }
+
+
+#endif
