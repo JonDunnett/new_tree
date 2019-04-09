@@ -20,7 +20,6 @@ public:
   Matrix* operator*(const Matrix& other); // operator overload matrix multiplication
   matrix_size get_size(void);             // gets matrix_size struct
   float get_value(int row, int col);      // get value at location
-
 };
 
 Matrix::Matrix(int rows, int cols) {
