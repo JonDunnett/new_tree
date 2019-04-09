@@ -4,15 +4,12 @@
 
 
 int main (int argc, char** argv) {
-  srand((unsigned int*) malloc(sizeof(unsigned int)));
+  srand(0/*(unsigned int*) malloc(sizeof(unsigned int))*/);
   Grammar G;
 
   read_grammar(argv[3],G);
   FILE * fp = fopen(argv[1],"w");
   fprintf(fp,"%s",(select_rule(G['S'])).c_str());
-  //printf("%s\n",G['S'].c_str());
-  //printf("%s\n",G['B'].c_str());
-  //printf("%s\n",G['A'].c_str());
   fclose(fp);
 
   int swi=0,tch=1;
@@ -20,30 +17,32 @@ int main (int argc, char** argv) {
     next_gen(argv[swi+1],argv[tch+1],G);
     swi=1-swi;tch=1-tch;
   } // swi is final output
-  const char finalfname = "final.txt";
-  end_gen(argv[swi+1],finalfname, G);
+  //const char finalfname = "final.txt";
+  end_gen(argv[swi+1],"final.txt"/*finalfname*/, G);
 
   char c,s;
-  std::stack</* still need a class def for this  */> matrices; // need to init stack with [ Identity matrix ]
-  fp = fopen(finalfname);
+  std::stack<char> matrices; // need to init stack with [ Identity matrix ]
+  fp = fopen("final.txt", "r");
 
-  Matrix PLUS = 0; // translation for a branch off to the right
-  Matrix MINU = 0; // translation for a branch off to the left
+  //Matrix PLUS = 0; // translation for a branch off to the right
+  //Matrix MINU = 0; // translation for a branch off to the left
 
   /* TRANSLATION MATRIX FORM
   [
-    [cos(theta),-sin(theta), dx],
-    [sin(theta), cos(theta), dy],
-    [     0    ,     0     ,  1]
+    [cos(theta),-sin(theta), dx ],
+    [sin(theta), cos(theta), dy ],
+    [     0    ,     0     ,  1 ]
   ]
   */
 
-  
   do {
     fscanf(fp,"%c",&c);
     if (c=='[') {
       // new branch
       fscanf(fp,"%c",&s); // get +/-
+      if (s == '+' || s=='-') {
+        matrices.push(s);
+      }
       // for now we're just gonna leave it as [+[-[+]]]
       // maybe we'll be more flexible later
       // STEPS:
@@ -56,23 +55,11 @@ int main (int argc, char** argv) {
       //    add a copy of plus or minus to the stack
     } else if (c==']') {
       // pop branch
+      printf("%c",matrices.top());
       matrices.pop();
     }
   } while (c!=';');
-
-
+  printf("%s\n","");
 
   return 0;
 }
-
-/*
-char y,*x ,* p = (char *) malloc(sizeof(char)*10);
-x=p;
-*x++='p';
-*x++='C';
-*x++='C';
-*x++='p';
-*x='\0';
-
-G['C']=p;
-*/

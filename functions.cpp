@@ -58,7 +58,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
     if (c < 91 && c > 64) {
       // capital letter
       if (c=='X') {fprintf(ofp, "%c", G[c][alt]); alt=1-alt;}
-      else {fprintf(ofp, "%s", G[c].c_str());}
+      else {fprintf(ofp, "%s", select_rule(G[c]).c_str());}
     }  else {
       // other aka bad input
       fprintf(ofp, "%c", c);
@@ -78,7 +78,7 @@ void end_gen(char* infile, char* outfile,Grammar &G) {
     if (c < 91 && c > 64) {
       // capital letter
       if (G[c].length() == 1){
-        fprintf(ofp, "%s", G[c].c_str());
+        fprintf(ofp, "%s", select_rule(G[c]).c_str());
       }
     } else {
       // other
@@ -92,8 +92,8 @@ void end_gen(char* infile, char* outfile,Grammar &G) {
 
 std::string select_rule(std::string line) {
     if (line.find('|')+1) {
-      std::string* strs = new string [5];
-      int i,j=0;
+      std::string* strs = new std::string [5];
+      int i=0,j=0;
       for (i=0;i<line.length();i++) {
         if (line[i]!='|') {
           strs[j]+=line[i];
@@ -101,7 +101,7 @@ std::string select_rule(std::string line) {
           j++;
         }
       }
-      return *strs[rand() % j];
+      return strs[rand() % ++j];
     } else {
       return line;
     }
