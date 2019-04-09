@@ -8,7 +8,7 @@ grammar format
  {\n
  [Non-terminal]:[production]\n
  [Non-terminal]:[production]\n
- [Non-terminal]:[production]|[production]|[production]
+ [Non-terminal]:[production]|[production]|[production]\n
  ...
  }
  ```
