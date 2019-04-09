@@ -55,11 +55,24 @@ Matrix::Matrix(const Matrix& copy) {
 
 }
 
+Matrix::~Matrix() {
+// dtor
+// PRE : Matrix must have memory allocated for data
+// POST: All memory freed
+  for(short i=0;i<size.rows;i++) {
+      free(data[i]);
+  }
+  free(data);
+}
+
 void Matrix::mem_alloc(void) {
-  // allocating memory for the values
-  // PRE : This matrix_size struct must be initialized with row and col values
-  // POST: Memory will be allocated based on the values in matrix_size struct
-  data = (float**) malloc(sizeof(float)*)
+// allocating memory for the values
+// PRE : This matrix_size struct must be initialized with row and col values
+// POST: Memory will be allocated based on the values in matrix_size struct
+  data = (float**) malloc(sizeof(float*)*this->size.rows);
+  for(short i=0;i<size.rows;i++){
+    *data[i] = (float*) malloc(sizeof(float)*size.cols);
+  }
 }
 
 Matrix* Matrix::operator*(const Matrix& other) {
