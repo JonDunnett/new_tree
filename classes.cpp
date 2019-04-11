@@ -86,5 +86,10 @@ matrix_size Matrix::get_size(void) const{
 // POST: Returns matrix_size struct
 }
 
+void Matrix::identity(void) {
+// initializes this matrix as identity matrix
+// PRE : Memory allocated for data
+// POST: Matrix will be identity matrix 
+}
 
 #endif
