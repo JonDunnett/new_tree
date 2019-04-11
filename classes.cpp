@@ -12,7 +12,7 @@ class Matrix {
   void mem_alloc(void);  // allocates memory for data
   void identity(void);   // sets this matrix to be identity matrix
 public:
-  Matrix()=0;                             // ctor but like don't use this
+  Matrix();                               // ctor but like don't use this
   Matrix(int rows, int cols);             // ctor defining # of rows/ cols
   Matrix(matrix_size size);               // ctor defining # of rows/ cols
   Matrix(const Matrix& copy);             // copy ctor
@@ -47,7 +47,7 @@ Matrix::Matrix(const Matrix& copy) {
 // Copy ctor
 // PRE : An existing matrix; MUST have values
 // POST: This matrix will be a copy of given matrix
-  matrix_size copy_size = copy.get_size()
+  matrix_size copy_size = copy.get_size();
   this->size.rows = copy_size.rows;
   this->size.cols = copy_size.rows;
   mem_alloc();
@@ -70,7 +70,7 @@ void Matrix::mem_alloc(void) {
 // POST: Memory will be allocated based on the values in matrix_size struct
   data = (float**) malloc(sizeof(float*)*this->size.rows);
   for(short i=0;i<size.rows;i++){
-    *data[i] = (float*) malloc(sizeof(float)*size.cols);
+    data[i] = (float*) malloc(sizeof(float)*size.cols);
   }
 }
 
