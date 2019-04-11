@@ -17,7 +17,7 @@ public:
   Matrix(matrix_size size);               // ctor defining # of rows/ cols
   Matrix(const Matrix& copy);             // copy ctor
   ~Matrix();                              // default dtor
-  Matrix* operator*(const Matrix& other); // operator overload matrix multiplication
+  Matrix operator*(const Matrix& other); // operator overload matrix multiplication
   matrix_size get_size(void);             // gets matrix_size struct
   float get_value(int row, int col);      // get value at location
 };
@@ -74,13 +74,13 @@ void Matrix::mem_alloc(void) {
   }
 }
 
-Matrix* Matrix::operator*(const Matrix& other) {
+Matrix Matrix::operator*(const Matrix& other) {
 // operator overload for matrix multiplication
 // PRE :
 // POST:
 }
 
-matrix_size Matrix::get_size(void) {
+matrix_size Matrix::get_size(void) const{
 // gets this matrix's matrix_size struct
 // PRE : matrix_size struct must be initialized with the size of the matrix
 // POST: Returns matrix_size struct
