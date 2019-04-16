@@ -76,8 +76,10 @@ void Matrix::mem_alloc(void) {
 
 Matrix Matrix::operator*(const Matrix& other) {
 // operator overload for matrix multiplication
-// PRE :
-// POST:
+// PRE : 
+// POST: returns a matrix containing the result of matrix multiplication 
+//       this matrix * other matrix 
+  
 }
 
 matrix_size Matrix::get_size(void) const{
