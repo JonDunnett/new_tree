@@ -3,11 +3,14 @@
 #include <stdlib.h>
 #include <string>
 #include <stack>
+#include <math.h>
 
 #ifndef _FUNCTIONS
 #define _FUNCTIONS
 // MAP Declaration
 typedef std::map<char, std::string> Grammar;
+// PI Definition
+#define PI 3.14159265
 
 // FUNCTIONS ----------------------------
 // Declarations
@@ -16,6 +19,8 @@ void read_grammar(char * infile, Grammar &G);
 void next_gen(char* infile, char* outfile, Grammar &G);
 void end_gen(char* infile, char* outfile);
 std::string select_rule(std::string line);
+float mcos(float angle);
+float msin(float anngle);
 
 // Prototypes
 int how_many(FILE* fp) {
@@ -69,7 +74,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
     fscanf(ifp,"%c", &c);
     if (c < 91 && c > 64) {
       // capital letter
-      if (c=='X') {fprintf(ofp, "%c", G[c][alt]); alt=1-alt;}
+      if (c=='D') {fprintf(ofp, "%c", G[c][alt]); alt=1-alt;}
       else {fprintf(ofp, "%s", select_rule(G[c]).c_str());}
     }  else {
       // other aka bad input
@@ -112,7 +117,7 @@ std::string select_rule(std::string line) {
 // PRE : existing string holding all possible productions (may only be one)
 // POST: returns a string holding a random single production
     if (line.find('|')+1) {
-      std::string* strs = new std::string [5];
+      std::string* strs = new std::string [10];
       int i=0,j=0;
       for (i=0;i<line.length();i++) {
         if (line[i]!='|') {
@@ -128,4 +133,16 @@ std::string select_rule(std::string line) {
 }
 
 
+float msin(float angle) {
+// my sine function takes an angle not radians
+// PRE : valid float angle
+// POST: returns sine of given angle
+  return sin(angle*PI/180);
+}
+float mcos(float angle){
+// my cosine function takes an angle not radians
+// PRE : valid float angle
+// POST: returns cosine of given angle
+  return cos(angle*PI/180);
+}
 #endif 

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "functions.cpp"
 #include "classes.cpp"
+#include <math.h>
+
 
 
 int main (int argc, char** argv) {
@@ -12,7 +14,7 @@ int main (int argc, char** argv) {
   FILE * fp = fopen(argv[1],"w");
   fprintf(fp,"%s",(select_rule(G['S'])).c_str());
   fclose(fp);
-
+  
   int swi=0,tch=1;
   for(short i=0;i<20;i++) {
     next_gen(argv[swi+1],argv[tch+1],G);
@@ -25,17 +27,30 @@ int main (int argc, char** argv) {
   std::stack<char> matrices; // need to init stack with [ Identity matrix ]
   fp = fopen("final.txt", "r");
 
-  //Matrix PLUS = 0; // translation for a branch off to the right
-  //Matrix MINU = 0; // translation for a branch off to the left
+  Matrix PLUS(3,3); // translation for a branch off to the right
+  Matrix MINU(3,3); // translation for a branch off to the left
 
   /* TRANSLATION MATRIX FORM
   [
-    [cos(theta),-sin(theta), dx ],
+    [cos(theta),-sin(theta), dx ],  
     [sin(theta), cos(theta), dy ],
     [     0    ,     0     ,  1 ]
   ]
+
   */
 
+  PLUS.set_value(0,0,   mcos(10));
+  PLUS.set_value(0,1,-1*msin(10));
+  PLUS.set_value(1,0,   msin(10));
+  PLUS.set_value(1,1,   mcos(10));
+
+  MINU.set_value(0,0,   mcos(-10)); // this can also be 350 if needed #GEOMETRY
+  MINU.set_value(0,1,-1*msin(-10));
+  MINU.set_value(1,0,   msin(-10));
+  MINU.set_value(1,1,   mcos(-10));
+
+
+// parsing output tree
   do {
     fscanf(fp,"%c",&c);
     if (c=='[') {
@@ -56,7 +71,6 @@ int main (int argc, char** argv) {
       //    add a copy of plus or minus to the stack
     } else if (c==']') {
       // pop branch
-      printf("%c",matrices.top());
       matrices.pop();
     }
   } while (c!=';');

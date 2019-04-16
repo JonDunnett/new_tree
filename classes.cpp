@@ -12,14 +12,15 @@ class Matrix {
   void mem_alloc(void);  // allocates memory for data
   void identity(void);   // sets this matrix to be identity matrix
 public:
-  Matrix();                               // ctor but like don't use this
-  Matrix(int rows, int cols);             // ctor defining # of rows/ cols
-  Matrix(matrix_size size);               // ctor defining # of rows/ cols
-  Matrix(const Matrix& copy);             // copy ctor
-  ~Matrix();                              // default dtor
-  Matrix operator*(const Matrix& other);  // operator overload matrix multiplication
-  matrix_size get_size(void) const;       // gets matrix_size struct
-  float get_value(int row, int col);      // get value at location
+  Matrix();                                      // ctor but like don't use this
+  Matrix(int rows, int cols);                    // ctor defining # of rows/ cols
+  Matrix(matrix_size size);                      // ctor defining # of rows/ cols
+  Matrix(const Matrix& copy);                    // copy ctor
+  ~Matrix();                                     // default dtor
+  Matrix operator*(const Matrix& other);         // operator overload matrix multiplication
+  matrix_size get_size(void) const;              // gets matrix_size struct
+  float get_value(int row, int col);             // get value at location
+  void set_value(int row, int col, float value); // set value at location
 };
 
 Matrix::Matrix(int rows, int cols) {
@@ -92,6 +93,14 @@ void Matrix::identity(void) {
 // initializes this matrix as identity matrix
 // PRE : Memory allocated for data
 // POST: Matrix will be identity matrix 
+}
+
+
+void Matrix::set_value(int row, int col, float value) {
+// sets value at given location
+// PRE : Data allocated for this object
+// POST: value assigned to given location 
+  data[row][col]=value;
 }
 
 #endif
