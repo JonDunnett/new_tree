@@ -23,6 +23,24 @@ public:
   void set_value(int row, int col, float value); // set value at location
 };
 
+
+class Triangle {
+  Matrix A,B,C;
+public:
+  void calculate_normal(void);
+  void output(/* output object */);
+};
+
+class Rectangle {
+  Matrix A,B,C,D; // representing the four verticies 
+
+public:
+  Rectangle();                // default ctor
+  void transform(Matrix M);   // transform triangle
+  Triangle upper(void);       // get upper triangle 
+  Triangle lower(void);       // get lower triangle
+};
+
 Matrix::Matrix(int rows, int cols) {
 // CTOR
 // PRE : Two ints representing the number of rows and columns respectively

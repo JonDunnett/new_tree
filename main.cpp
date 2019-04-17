@@ -24,7 +24,7 @@ int main (int argc, char** argv) {
   end_gen(argv[swi+1],"final.txt"/*finalfname*/, G);
 
   char c,s;
-  std::stack<char> matrices; // need to init stack with [ Identity matrix ]
+  std::stack<Matrix> matrices; // need to init stack with [ Identity matrix ]
   fp = fopen("final.txt", "r");
 
   Matrix PLUS(3,3); // translation for a branch off to the right
@@ -56,8 +56,10 @@ int main (int argc, char** argv) {
     if (c=='[') {
       // new branch
       fscanf(fp,"%c",&s); // get +/-
-      if (s == '+' || s=='-') {
-        matrices.push(s);
+      if (s == '+') {
+        matrices.push(Matrix(PLUS));
+      } else if (s=='-') {
+	matrices.push(Matrix(MINU));
       }
       // for now we're just gonna leave it as [+[-[+]]]
       // maybe we'll be more flexible later
