@@ -158,5 +158,4 @@ void translate(Rectangle rect, const std::vector<Matrix> matrices) {
   }
 
 }
-
 #endif 
