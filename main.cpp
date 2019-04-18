@@ -3,6 +3,7 @@
 #include "functions.cpp"
 #include "classes.cpp"
 #include <math.h>
+#include <vector>
 
 
 
@@ -49,7 +50,8 @@ int main (int argc, char** argv) {
   MINU.set_value(1,0,   msin(-10));
   MINU.set_value(1,1,   mcos(-10));
 
-
+  
+  Rectangle rect;
 // parsing output tree
   do {
     fscanf(fp,"%c",&c);
@@ -57,15 +59,17 @@ int main (int argc, char** argv) {
       // new branch
       fscanf(fp,"%c",&s); // get +/-
       if (s == '+') {
-        matrices.push(Matrix(PLUS));
+        matrices.push_back(Matrix(PLUS));
       } else if (s=='-') {
-	matrices.push(Matrix(MINU));
+	matrices.push_back(Matrix(MINU));
       }
       // for now we're just gonna leave it as [+[-[+]]]
       // maybe we'll be more flexible later
       // STEPS:
       // 1) create rectangle on origin
+        rect = Rectangle();
       // 2) translate rectangle
+        translate(rect,matrices); 	
       // 3) convert to triangle
       // 4) calculate normal
       // 5) output triangle

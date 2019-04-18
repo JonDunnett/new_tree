@@ -21,6 +21,7 @@ void end_gen(char* infile, char* outfile);
 std::string select_rule(std::string line);
 float mcos(float angle);
 float msin(float anngle);
+void  translate(Rectangle rect, const std::vector<Matrix> matrices);
 
 // Prototypes
 int how_many(FILE* fp) {
@@ -144,5 +145,17 @@ float mcos(float angle){
 // PRE : valid float angle
 // POST: returns cosine of given angle
   return cos(angle*PI/180);
+}
+
+
+void translate(Rectangle rect, const std::vector<Matrix> matrices) {
+// translate rectangle using the series of matrices stored in vector 
+// PRE : Rectangle rect must be initialized with points corresponding to
+//       the desired starting point.  
+// POST: Rectangle rect will be translated, this modifies the object! 
+  for (short i=0;i<matrices.size();i++) {
+    rect.transform(matrices[i]);        
+  }
+
 }
 #endif 

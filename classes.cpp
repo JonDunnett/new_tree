@@ -36,7 +36,7 @@ class Rectangle {
 
 public:
   Rectangle();                // default ctor
-  void transform(Matrix M);   // transform triangle
+  void transform(Matrix M);   // transform rectangle
   Triangle upper(void);       // get upper triangle 
   Triangle lower(void);       // get lower triangle
 };
@@ -98,19 +98,28 @@ Matrix Matrix::operator*(const Matrix& other) {
 // PRE : 
 // POST: returns a matrix containing the result of matrix multiplication 
 //       this matrix * other matrix 
-  
+
+// [HEY JON THIS NEEDS TO GET DONE!!]
+ 
 }
 
 matrix_size Matrix::get_size(void) const{
 // gets this matrix's matrix_size struct
 // PRE : matrix_size struct must be initialized with the size of the matrix
 // POST: Returns matrix_size struct
+  return this->size;
 }
 
 void Matrix::identity(void) {
 // initializes this matrix as identity matrix
 // PRE : Memory allocated for data
 // POST: Matrix will be identity matrix 
+  for(short i=0;i<this->size.rows;i++) {
+    for (short j=0;this->size.cols;j++) {
+      if (i==j) {data[i][j] == 1.0;}
+      else { data[i][j] == 0.0;}
+    }
+  }
 }
 
 
@@ -120,5 +129,43 @@ void Matrix::set_value(int row, int col, float value) {
 // POST: value assigned to given location 
   data[row][col]=value;
 }
+
+void Rectangle::transform(Matrix M) {
+// transform rectangle specified by givem matrix M
+// PRE : matrix must contain values (memory allocated)
+// POST: rectangle will be transformed
+  this->A = (this->A)*M;
+  this->B = (this->B)*M;
+  this->C = (this->C)*M;
+  this->D = (this->D)*M;
+}
+
+Rectangle::Rectangle() {
+// default ctor
+// PRE : 
+// POST: Rectangle points initialized such that the rectangle 
+//       center is at the origin
+  A = Matrix(3,1);
+  B = Matrix(3,1);
+  C = Matrix(3,1);
+  D = Matrix(3,1);
+  // A -------------
+  A.set_value(0,0,-1.0);
+  A.set_value(1,0,1.0);
+  A.set_value(2,0,0.0);
+  // B -------------
+  B.set_value(0,0,1.0);
+  B.set_value(1,0,1.0);
+  B.set_value(2,0,0.0);
+  // C -------------
+  C.set_value(0,0,1.0);
+  C.set_value(1,0,-1.0);
+  C.set_value(2,0,0.0);
+  // D -------------
+  D.set_value(0,0,-1.0);
+  D.set_value(1,0,-1.0);
+  D.set_value(2,0,0.0);
+}
+
 
 #endif
