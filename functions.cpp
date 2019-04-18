@@ -4,6 +4,7 @@
 #include <string>
 #include <stack>
 #include <math.h>
+#include <vector>
 
 #ifndef _FUNCTIONS
 #define _FUNCTIONS

@@ -19,7 +19,7 @@ public:
   ~Matrix();                                     // default dtor
   Matrix operator*(const Matrix& other);         // operator overload matrix multiplication
   matrix_size get_size(void) const;              // gets matrix_size struct
-  float get_value(int row, int col);             // get value at location
+  float get_value(int row, int col) const;       // get value at location
   void set_value(int row, int col, float value); // set value at location
 };
 
@@ -40,6 +40,12 @@ public:
   Triangle upper(void);       // get upper triangle 
   Triangle lower(void);       // get lower triangle
 };
+
+Matrix::Matrix() {
+// default ctor
+// PRE : Don't use it
+// POST: just don't
+}
 
 Matrix::Matrix(int rows, int cols) {
 // CTOR
@@ -99,8 +105,28 @@ Matrix Matrix::operator*(const Matrix& other) {
 // POST: returns a matrix containing the result of matrix multiplication 
 //       this matrix * other matrix 
 
-// [HEY JON THIS NEEDS TO GET DONE!!]
- 
+// [This now just needs to be tested]
+  if (this->size.rows== other.get_size().rows) {
+    Matrix res = Matrix(other.get_size());
+    if (this->size.cols == other.get_size().cols) {
+      for (short i=0;i<this->size.cols;i++) {
+        for (short j=0;i<this->size.cols;j++) {
+          for (short k=0;i<this->size.cols;k++) {
+            res.set_value(i,j, this->data[i][j] * other.get_value(k,j)); 
+          }  
+        } 
+      }
+    } else /* matrix x vector */ {
+      for (short i=0;i<this->size.rows;i++) {
+        float a=other.get_value(0,0)*this->data[i][0],
+              b=other.get_value(1,0)*this->data[i][1],
+              c=other.get_value(2,0)*this->data[i][2];
+  
+        res.set_value(i,0, a+b+c); 
+      }
+    }
+    return res;
+  } else { /* ERROR - incompatible sizes */ }
 }
 
 matrix_size Matrix::get_size(void) const{
@@ -121,7 +147,6 @@ void Matrix::identity(void) {
     }
   }
 }
-
 
 void Matrix::set_value(int row, int col, float value) {
 // sets value at given location
@@ -167,5 +192,33 @@ Rectangle::Rectangle() {
   D.set_value(2,0,0.0);
 }
 
+float Matrix::get_value(int row, int col) const {
+// get value at location 
+// PRE : Matrix initialized with data
+// POST: value at given indicies returned
+  return data[row][col]; 
+}
 
+Triangle Rectangle::upper(void) {
+// get upper triangle
+// PRE : Rectangle must be initialized with points
+// POST: returns the lower triangle formed by the 
+//       vertices of the rectangle 
+
+} 
+
+Triangle Rectangle::lower(void) {
+// get lower triangle
+// PRE : Rectangle must be initialized with points
+// POST: returns the upper triangle formed by the 
+//       vertices of the rectangle
+
+}
+
+void Triangle::output(/* output object */) {
+// output the the points and normal in stl format
+// PRE : This triangle must be initialize by a rectangle
+// POST: Triangle data output to given obj in stl format
+
+} 
 #endif

@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "functions.cpp"
 #include "classes.cpp"
+#include "functions.cpp"
 #include <math.h>
 #include <vector>
 
 
-
+// main function 
 int main (int argc, char** argv) {
   srand(0);
   Grammar G;
@@ -25,7 +25,7 @@ int main (int argc, char** argv) {
   end_gen(argv[swi+1],"final.txt"/*finalfname*/, G);
 
   char c,s;
-  std::stack<Matrix> matrices; // need to init stack with [ Identity matrix ]
+  std::vector<Matrix> matrices; // need to init stack with [ Identity matrix ]
   fp = fopen("final.txt", "r");
 
   Matrix PLUS(3,3); // translation for a branch off to the right
@@ -52,6 +52,14 @@ int main (int argc, char** argv) {
 
   
   Rectangle rect;
+  Triangle tri;
+ 
+ // output rectangle on origin
+  rect = Rectangle();
+  tri = Triangle(rect.upper());
+  tri.output(/* either std::fout || filename */);
+
+
 // parsing output tree
   do {
     fscanf(fp,"%c",&c);
@@ -61,7 +69,7 @@ int main (int argc, char** argv) {
       if (s == '+') {
         matrices.push_back(Matrix(PLUS));
       } else if (s=='-') {
-	matrices.push_back(Matrix(MINU));
+        matrices.push_back(Matrix(MINU));
       }
       // for now we're just gonna leave it as [+[-[+]]]
       // maybe we'll be more flexible later
@@ -70,17 +78,19 @@ int main (int argc, char** argv) {
         rect = Rectangle();
       // 2) translate rectangle
         translate(rect,matrices); 	
-      // 3) convert to triangle
-      // 4) calculate normal
-      // 5) output triangle
-      // 6) add +/- matrix to stack  => matrices.push_back(Matrix(PLUS))
+      // 3) convert to triangle and output
+        tri = Triangle(rect.upper());
+      	tri.output(/* either std::fout || filename */);
+        tri = Triangle(rect.lower());
+        tri.output(/* either std::fout || filename */);
+      // 4) output triangle
+      // 5) add +/- matrix to stack  => matrices.push_back(Matrix(PLUS))
       //    add a copy of plus or minus to the stack
     } else if (c==']') {
       // pop branch
-      matrices.pop();
+      matrices.pop_back();
     }
   } while (c!=';');
   printf("%s\n","");
-
   return 0;
 }
