@@ -5,7 +5,6 @@
 #include <stack>
 #include <math.h>
 
-
 #ifndef _FUNCTIONS
 #define _FUNCTIONS
 // MAP Declaration
