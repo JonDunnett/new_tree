@@ -17,7 +17,7 @@ int main (int argc, char** argv) {
   fclose(fp);
   
   int swi=0,tch=1;
-  for(short i=0;i<20;i++) {
+  for(short i=0;i<10;i++) {
     next_gen(argv[swi+1],argv[tch+1],G);
     swi=1-swi;tch=1-tch;
   } // swi is final output
@@ -25,7 +25,7 @@ int main (int argc, char** argv) {
   end_gen(argv[swi+1],"final.txt"/*finalfname*/, G);
 
   char c,s;
-  std::vector<Matrix> matrices; // need to init stack with [ Identity matrix ]
+  //std::vector<Matrix> matrices; // need to init stack with [ Identity matrix ]
   fp = fopen("final.txt", "r");
 
   Matrix PLUS(3,3); // translation for a branch off to the right
@@ -40,6 +40,8 @@ int main (int argc, char** argv) {
 
   */
 
+
+
   PLUS.set_value(0,0,   mcos(10));
   PLUS.set_value(0,1,-1*msin(10));
   PLUS.set_value(1,0,   msin(10));
@@ -51,15 +53,15 @@ int main (int argc, char** argv) {
   MINU.set_value(1,1,   mcos(-10));
 
   
-  Rectangle rect;
-  Triangle tri;
+  //Rectangle rect;
+  //Triangle tri;
  
  // output rectangle on origin
-  rect = Rectangle();
-  tri = Triangle(rect.upper());
-  tri.output(/* either std::fout || filename */);
+  //rect = Rectangle();
+  //tri = Triangle(rect.upper());
+  //tri.output();/* either std::fout || filename * /);
 
-
+/*
 // parsing output tree
   do {
     fscanf(fp,"%c",&c);
@@ -80,9 +82,9 @@ int main (int argc, char** argv) {
         translate(rect,matrices); 	
       // 3) convert to triangle and output
         tri = Triangle(rect.upper());
-      	tri.output(/* either std::fout || filename */);
+      	tri.output(/* either std::fout || filename * /);
         tri = Triangle(rect.lower());
-        tri.output(/* either std::fout || filename */);
+        tri.output(/* either std::fout || filename * /);
       // 4) output triangle
       // 5) add +/- matrix to stack  => matrices.push_back(Matrix(PLUS))
       //    add a copy of plus or minus to the stack
@@ -91,6 +93,7 @@ int main (int argc, char** argv) {
       matrices.pop_back();
     }
   } while (c!=';');
+*/
   printf("%s\n","");
   return 0;
 }
