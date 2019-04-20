@@ -1,35 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "classes.cpp"
-#include "functions.cpp"
 #include <math.h>
 #include <vector>
+#include "classes.cpp"
+#include "functions.cpp"
 
 
 // main function 
 int main (int argc, char** argv) {
   srand(0);
   Grammar G;
-
-  read_grammar(argv[3],G);
-  FILE * fp = fopen(argv[1],"w");
+  
+  read_grammar(argv[2],G);
+  FILE * fp = fopen(".at","w");
   fprintf(fp,"%s",(select_rule(G['S'])).c_str());
   fclose(fp);
-  
-  int swi=0,tch=1;
-  for(short i=0;i<10;i++) {
-    next_gen(argv[swi+1],argv[tch+1],G);
-    swi=1-swi;tch=1-tch;
+  for(short i=0;i<multicti(argv[1]);i++) {
+    next_gen(".at",G);
   } // swi is final output
   //const char finalfname = "final.txt";
-  end_gen(argv[swi+1],"final.txt"/*finalfname*/, G);
+  end_gen(".at","final.txt"/*finalfname*/, G);
 
   char c,s;
   //std::vector<Matrix> matrices; // need to init stack with [ Identity matrix ]
-  fp = fopen("final.txt", "r");
+  //fp = fopen("final.txt", "r");
 
-  Matrix PLUS(3,3); // translation for a branch off to the right
-  Matrix MINU(3,3); // translation for a branch off to the left
+  //Matrix PLUS(3,3); // translation for a branch off to the right
+  //Matrix MINU(3,3); // translation for a branch off to the left
 
   /* TRANSLATION MATRIX FORM
   [
@@ -42,15 +39,15 @@ int main (int argc, char** argv) {
 
 
 
-  PLUS.set_value(0,0,   mcos(10));
-  PLUS.set_value(0,1,-1*msin(10));
-  PLUS.set_value(1,0,   msin(10));
-  PLUS.set_value(1,1,   mcos(10));
+  //PLUS.set_value(0,0,   mcos(10));
+  //PLUS.set_value(0,1,-1*msin(10));
+  //PLUS.set_value(1,0,   msin(10));
+  //PLUS.set_value(1,1,   mcos(10));
 
-  MINU.set_value(0,0,   mcos(-10)); // this can also be 350 if needed #GEOMETRY
-  MINU.set_value(0,1,-1*msin(-10));
-  MINU.set_value(1,0,   msin(-10));
-  MINU.set_value(1,1,   mcos(-10));
+  //MINU.set_value(0,0,   mcos(-10)); // this can also be 350 if needed #GEOMETRY
+  //MINU.set_value(0,1,-1*msin(-10));
+  //MINU.set_value(1,0,   msin(-10));
+  //MINU.set_value(1,1,   mcos(-10));
 
   
   //Rectangle rect;

@@ -17,13 +17,16 @@ typedef std::map<char, std::string> Grammar;
 // Declarations
 int how_many(FILE* fp);
 void read_grammar(char * infile, Grammar &G);
-void next_gen(char* infile, char* outfile, Grammar &G);
+void next_gen(char* infile, Grammar &G);
 void end_gen(char* infile, char* outfile);
 std::string select_rule(std::string line);
 float mcos(float angle);
 float msin(float anngle);
 void  translate(Rectangle rect, const std::vector<Matrix> matrices);
-
+void cp(char * in, char * out);
+int chartoint(char c);
+int multicti(char * c);
+int exp(int x, int pow); 
 // Prototypes
 int how_many(FILE* fp) {
 // Counts the number of characters in the given file
@@ -63,13 +66,13 @@ void read_grammar(char * infile, Grammar &G) {
   fclose(ifp);
 }
 
-void next_gen(char* infile, char*outfile, Grammar &G) {
+void next_gen(char* infile, Grammar &G) {
 // iterate generation as specified by grammar
 // PRE : existing infile; initialized Grammar
 // POST: infile parsed; rules defined by grammar iterated one generation and
 //       output to outfile
   FILE* ifp = fopen(infile, "r");
-  FILE* ofp = fopen(outfile, "w");
+  FILE* ofp = fopen(".tmp", "w");
   int i, alt=0,len = how_many(ifp);
   char c;
   for (i=0;i<len;i++) {
@@ -85,6 +88,7 @@ void next_gen(char* infile, char*outfile, Grammar &G) {
   }
   fclose(ifp);
   fclose(ofp);
+  cp(".tmp",infile);
 }
 
 void end_gen(char* infile, char* outfile,Grammar &G) {
@@ -158,5 +162,54 @@ void translate(Rectangle rect, const std::vector<Matrix> matrices) {
     rect.transform(matrices[i]);        
   }
 
+}
+
+void cp(char * in, char * out) {
+// copy file contents from in to out
+// PRE : infile and outfile not opened
+// POST: contents from in transfered to out
+  FILE * infile  = fopen(in,"r"),
+       * outfile = fopen(out,"w");
+
+  int limit = how_many(infile);
+  char t;
+  for (short i=0;i<limit;i++) {
+    fscanf(infile, "%c", &t);
+    fprintf(outfile, "%c", t);
+  }   
+  fclose(infile);
+  fclose(outfile);   
+}
+
+int chartoint(char c) {
+// convert char to int
+// PRE : Must be a char representing an integer
+// POST: returned integer value
+  return -1*('0'-c);
+}
+
+int multicti(char * c) {
+// convert string to integer
+// PRE : Existing null terminated string c
+// POST: returned integer value
+  int j=0,i=0,sum=0;
+  char * p=c;
+  while(*p!='\0'){i++;p++;}
+  while (i>j){
+    sum+= chartoint(*(--p))*exp(10,j++); 
+  }
+  
+  return sum;
+}
+
+int exp(int x, int pow) {
+// exponentiate integer
+// PRE : existing integers
+// POST: returns x^pow
+  int ans=1;
+  for(;pow>0;--pow) {
+    ans = ans * x;
+  }
+  return ans;
 }
 #endif 
