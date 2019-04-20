@@ -17,7 +17,7 @@ public:
   Matrix(matrix_size size);                      // ctor defining # of rows/ cols
   Matrix(const Matrix& copy);                    // copy ctor
   ~Matrix();                                     // default dtor
-  Matrix operator*(const Matrix& other);         // operator overload matrix multiplication
+  Matrix* operator*(const Matrix& other);         // operator overload matrix multiplication
   matrix_size get_size(void) const;              // gets matrix_size struct
   float get_value(int row, int col) const;       // get value at location
   void set_value(int row, int col, float value); // set value at location
@@ -99,7 +99,7 @@ void Matrix::mem_alloc(void) {
   }
 }
 
-Matrix Matrix::operator*(const Matrix& other) {
+Matrix* Matrix::operator*(const Matrix& other) {
 // operator overload for matrix multiplication
 // PRE : 
 // POST: returns a matrix containing the result of matrix multiplication 
@@ -107,12 +107,12 @@ Matrix Matrix::operator*(const Matrix& other) {
 
 // [This now just needs to be tested]
   if (this->size.rows== other.get_size().rows) {
-    Matrix res = Matrix(other.get_size());
+    Matrix* res = new Matrix(other.get_size());
     if (this->size.cols == other.get_size().cols) {
       for (short i=0;i<this->size.cols;i++) {
         for (short j=0;i<this->size.cols;j++) {
           for (short k=0;i<this->size.cols;k++) {
-            res.set_value(i,j, this->data[i][j] * other.get_value(k,j)); 
+            res->set_value(i,j, this->data[i][j] * other.get_value(k,j)); 
           }  
         } 
       }
@@ -122,7 +122,7 @@ Matrix Matrix::operator*(const Matrix& other) {
               b=other.get_value(1,0)*this->data[i][1],
               c=other.get_value(2,0)*this->data[i][2];
   
-        res.set_value(i,0, a+b+c); 
+        res->set_value(i,0, a+b+c); 
       }
     }
     return res;
@@ -141,7 +141,7 @@ void Matrix::identity(void) {
 // PRE : Memory allocated for data
 // POST: Matrix will be identity matrix 
   for(short i=0;i<this->size.rows;i++) {
-    for (short j=0;this->size.cols;j++) {
+    for (short j=0;j<this->size.cols;j++) {
       if (i==j) {data[i][j] == 1.0;}
       else { data[i][j] == 0.0;}
     }
@@ -159,10 +159,10 @@ void Rectangle::transform(Matrix M) {
 // transform rectangle specified by givem matrix M
 // PRE : matrix must contain values (memory allocated)
 // POST: rectangle will be transformed
-  this->A = (this->A)*M;
-  this->B = (this->B)*M;
-  this->C = (this->C)*M;
-  this->D = (this->D)*M;
+  this->A = *((this->A)*M);
+  this->B = *((this->B)*M);
+  this->C = *((this->C)*M);
+  this->D = *((this->D)*M);
 }
 
 Rectangle::Rectangle() {

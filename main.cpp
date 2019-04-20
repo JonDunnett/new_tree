@@ -22,13 +22,15 @@ int main (int argc, char** argv) {
   end_gen(".at","final.txt"/*finalfname*/, G);
 
   char c,s;
-  //std::vector<Matrix> matrices; // need to init stack with [ Identity matrix ]
-  //fp = fopen("final.txt", "r");
+  std::vector<Matrix> matrices; // need to init stack with [ Identity matrix ]
+  fp = fopen("final.txt", "r");
 
-  //Matrix PLUS(3,3); // translation for a branch off to the right
-  //Matrix MINU(3,3); // translation for a branch off to the left
+  Matrix PLUS(3,3); // translation for a branch off to the right
+  Matrix MINU(3,3); // translation for a branch off to the left
 
-  /* TRANSLATION MATRIX FORM
+  /* 
+
+  TRANSLATION MATRIX FORM
   [
     [cos(theta),-sin(theta), dx ],  
     [sin(theta), cos(theta), dy ],
@@ -39,24 +41,24 @@ int main (int argc, char** argv) {
 
 
 
-  //PLUS.set_value(0,0,   mcos(10));
-  //PLUS.set_value(0,1,-1*msin(10));
-  //PLUS.set_value(1,0,   msin(10));
-  //PLUS.set_value(1,1,   mcos(10));
+  PLUS.set_value(0,0,   mcos(10));
+  PLUS.set_value(0,1,-1*msin(10));
+  PLUS.set_value(1,0,   msin(10));
+  PLUS.set_value(1,1,   mcos(10));
 
-  //MINU.set_value(0,0,   mcos(-10)); // this can also be 350 if needed #GEOMETRY
-  //MINU.set_value(0,1,-1*msin(-10));
-  //MINU.set_value(1,0,   msin(-10));
-  //MINU.set_value(1,1,   mcos(-10));
+  MINU.set_value(0,0,   mcos(-10)); // this can also be 350 if needed #GEOMETRY
+  MINU.set_value(0,1,-1*msin(-10));
+  MINU.set_value(1,0,   msin(-10));
+  MINU.set_value(1,1,   mcos(-10));
 
   
-  //Rectangle rect;
-  //Triangle tri;
+  Rectangle rect;
+  Triangle tri;
  
- // output rectangle on origin
-  //rect = Rectangle();
-  //tri = Triangle(rect.upper());
-  //tri.output();/* either std::fout || filename * /);
+  // output rectangle on origin
+  rect = Rectangle();
+  tri = Triangle(rect.upper());
+  tri.output();/* either std::fout || filename * /);
 
 /*
 // parsing output tree
