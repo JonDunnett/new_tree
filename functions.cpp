@@ -23,12 +23,10 @@ void end_gen(char* infile, char* outfile);
 std::string select_rule(std::string line);
 float mcos(float angle);
 float msin(float anngle);
-void  translate(Rectangle rect, const std::vector<Matrix> matrices);
 void cp(char * in, char * out);
 int chartoint(char c);
 int multicti(char * c);
 int exp(int x, int pow);
-std::vector<float> mult(const Matrix M, const std::vector<float> V); 
 // Prototypes
 int how_many(FILE* fp) {
 // Counts the number of characters in the given file
@@ -155,18 +153,6 @@ float mcos(float angle){
 }
 
 
-void translate(Rectangle rect, const std::vector<Matrix> matrices) {
-// translate rectangle using the series of matrices stored in vector 
-// PRE : Rectangle rect must be initialized with points corresponding to
-//       the desired starting point.  
-// POST: Rectangle rect will be translated, this modifies the object! 
-  Matrix* M; 
-  for (short i=0;i<matrices.size();i++) {
-    rect.transform(matrices[i]);        
-  }
-
-}
-
 void cp(char * in, char * out) {
 // copy file contents from in to out
 // PRE : infile and outfile not opened
@@ -216,20 +202,5 @@ int exp(int x, int pow) {
   return ans;
 }
 
-std::vector<float> mult(const Matrix M, const std::vector<float> V) {
-// matrix multiplication matrix * vector
-// PRE : Existing matrix M, vector V
-// POST: Returns vector representing the result of M*V
-  int size = M.get_size().rows;
-  std::vector<float> res;
-  float a,b,c;
-  for(short i=0;i<size;i++) {
-    a = V[0]*M->get_value(i,0);
-    b = V[1]*M->get_value(i,1);
-    c = V[2]*M->get_value(i,2);
-
-    res.push_back(a+b+c); 
-  }  
-}
 
 #endif 

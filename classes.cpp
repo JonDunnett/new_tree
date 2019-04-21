@@ -28,7 +28,7 @@ public:
 
 
 class Triangle {
-  Matrix A,B,C;
+  std::vector<float>  A,B,C;
 public:
   void calculate_normal(void);
   void output(/* output object */);
@@ -43,6 +43,10 @@ public:
   Triangle upper(void);       // get upper triangle 
   Triangle lower(void);       // get lower triangle
 };
+
+void  translate(Rectangle rect, const std::vector<Matrix> matrices);
+std::vector<float> mult(const Matrix M, const std::vector<float> V); 
+
 
 Matrix::Matrix() {
 // default ctor
@@ -220,5 +224,36 @@ void Triangle::output(/* output object */) {
 // PRE : This triangle must be initialize by a rectangle
 // POST: Triangle data output to given obj in stl format
 
-} 
+}
+
+std::vector<float> mult(const Matrix M, const std::vector<float> V) {
+// matrix multiplication matrix * vector
+// PRE : Existing matrix M, vector V
+// POST: Returns vector representing the result of M*V
+  int size = 0;//M.get_size().rows;
+  std::vector<float> res;
+  float a,b,c;
+  for(short i=0;i<size;i++) {
+    //a = V[0]*M->get_value(i,0);
+    //b = V[1]*M->get_value(i,1);
+    //c = V[2]*M->get_value(i,2);
+
+    //res.push_back(a+b+c); 
+  }
+
+  return res;  
+}
+
+void translate(Rectangle rect, const std::vector<Matrix> matrices) {
+// translate rectangle using the series of matrices stored in vector 
+// PRE : Rectangle rect must be initialized with points corresponding to
+//       the desired starting point.  
+// POST: Rectangle rect will be translated, this modifies the object! 
+  Matrix* M; 
+  for (short i=0;i<matrices.size();i++) {
+    rect.transform(matrices[i]);        
+  }
+}
+
+ 
 #endif

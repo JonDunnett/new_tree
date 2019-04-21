@@ -53,7 +53,7 @@ int main (int argc, char** argv) {
 
   
   Rectangle rect; // double free or corruption
-  //Triangle tri;   // Segfault
+  Triangle tri;   // Segfault
  
   // output rectangle on origin
   //rect = Rectangle();
