@@ -2,6 +2,7 @@
 #define _CLASSES
 
 #include <vector>
+#include "functions.cpp"
 
 struct  matrix_size {
   int rows;
@@ -19,7 +20,7 @@ public:
   Matrix(matrix_size size);                      // ctor defining # of rows/ cols
   Matrix(const Matrix& copy);                    // copy ctor
   ~Matrix();                                     // default dtor
-  Matrix* operator*(const Matrix& other);         // operator overload matrix multiplication
+  Matrix* operator*(const Matrix& other);        // operator overload matrix multiplication
   matrix_size get_size(void) const;              // gets matrix_size struct
   float get_value(int row, int col) const;       // get value at location
   void set_value(int row, int col, float value); // set value at location
@@ -162,10 +163,10 @@ void Rectangle::transform(Matrix M) {
 // transform rectangle specified by givem matrix M
 // PRE : matrix must contain values (memory allocated)
 // POST: rectangle will be transformed
-  //this->A = *((this->A)*M);
-  //this->B = *((this->B)*M);
-  //this->C = *((this->C)*M);
-  //this->D = *((this->D)*M);
+  //this->A = mult(M,this->A);
+  //this->B = mult(M,this->B);
+  //this->C = mult(M,this->C);
+  //this->D = mult(M,this->D);
 }
 
 Rectangle::Rectangle() {
