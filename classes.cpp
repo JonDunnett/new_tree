@@ -28,17 +28,27 @@ public:
 
 
 class Triangle {
-  std::vector<float>  A,B,C;
+  std::vector<float>  A,B,C;  // represents 3 vertices
 public:
-  void calculate_normal(void);
-  void output(/* output object */);
+  Triangle();                         // default ctor
+  ~Triangle();                        // defualt dtor
+  Triangle(std::vector<float> p1,      // ctor given points
+           std::vector<float> p2,
+           std::vector<float> p3);
+  void calculate_normal(void);        // calculates normal
+  void output(/* output object */);   // outputs in stl format
 };
 
 class Rectangle {
   std::vector<float> A,B,C,D; // representing the four verticies 
+  // A--B
+  // | /|
+  // |/ |
+  // C--D
 
 public:
   Rectangle();                // default ctor
+  ~Rectangle();               // defualt dtor
   void transform(Matrix M);   // transform rectangle
   Triangle upper(void);       // get upper triangle 
   Triangle lower(void);       // get lower triangle
@@ -208,7 +218,7 @@ Triangle Rectangle::upper(void) {
 // PRE : Rectangle must be initialized with points
 // POST: returns the lower triangle formed by the 
 //       vertices of the rectangle 
-
+  return Triangle(this->A,this->B,this->D);
 } 
 
 Triangle Rectangle::lower(void) {
@@ -216,7 +226,7 @@ Triangle Rectangle::lower(void) {
 // PRE : Rectangle must be initialized with points
 // POST: returns the upper triangle formed by the 
 //       vertices of the rectangle
-
+  return Triangle(this->B,this->C,this->D);
 }
 
 void Triangle::output(/* output object */) {
@@ -255,5 +265,36 @@ void translate(Rectangle rect, const std::vector<Matrix> matrices) {
   }
 }
 
+Triangle::Triangle(){
+// default ctor
+// PRE : NONE
+// POST: Object created
+
+}
+
+Triangle::~Triangle(){
+// defualt dtor
+// PRE : 
+// POST: Object destroyed
+
+}
+
+Triangle::Triangle(std::vector<float> p1, std::vector<float> p2, std::vector<float> p3) {
+// ctor given points as vectors
+// PRE : All 3 vectors must be initialized with x,y, and z coordinates
+// POST: Triangle created with given points
+  for(short i=0;i<3;i++) {
+    this->A[i] = p1[i];
+    this->B[i] = p2[i];
+    this->C[i] = p3[i]; 
+  }
+}
+
  
+Rectangle::~Rectangle(){
+// defualt dtor
+// PRE : Existing Rectangle
+// POST: Rectangle destroyed
+
+}
 #endif
