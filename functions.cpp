@@ -158,6 +158,7 @@ void translate(Rectangle rect, const std::vector<Matrix> matrices) {
 // PRE : Rectangle rect must be initialized with points corresponding to
 //       the desired starting point.  
 // POST: Rectangle rect will be translated, this modifies the object! 
+  Matrix* M; 
   for (short i=0;i<matrices.size();i++) {
     rect.transform(matrices[i]);        
   }

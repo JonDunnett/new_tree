@@ -1,6 +1,8 @@
 #ifndef _CLASSES
 #define _CLASSES
 
+#include <vector>
+
 struct  matrix_size {
   int rows;
   int cols;
@@ -32,7 +34,7 @@ public:
 };
 
 class Rectangle {
-  Matrix A,B,C,D; // representing the four verticies 
+  std::vector<float> A,B,C,D; // representing the four verticies 
 
 public:
   Rectangle();                // default ctor
@@ -99,6 +101,7 @@ void Matrix::mem_alloc(void) {
   }
 }
 
+
 Matrix* Matrix::operator*(const Matrix& other) {
 // operator overload for matrix multiplication
 // PRE : 
@@ -159,10 +162,10 @@ void Rectangle::transform(Matrix M) {
 // transform rectangle specified by givem matrix M
 // PRE : matrix must contain values (memory allocated)
 // POST: rectangle will be transformed
-  this->A = *((this->A)*M);
-  this->B = *((this->B)*M);
-  this->C = *((this->C)*M);
-  this->D = *((this->D)*M);
+  //this->A = *((this->A)*M);
+  //this->B = *((this->B)*M);
+  //this->C = *((this->C)*M);
+  //this->D = *((this->D)*M);
 }
 
 Rectangle::Rectangle() {
@@ -170,26 +173,22 @@ Rectangle::Rectangle() {
 // PRE : 
 // POST: Rectangle points initialized such that the rectangle 
 //       center is at the origin
-  A = Matrix(3,1);
-  B = Matrix(3,1);
-  C = Matrix(3,1);
-  D = Matrix(3,1);
   // A -------------
-  A.set_value(0,0,-1.0);
-  A.set_value(1,0,1.0);
-  A.set_value(2,0,0.0);
+  this->A.push_back(-1.0);
+  this->A.push_back(1.0);
+  this->A.push_back(0.0);
   // B -------------
-  B.set_value(0,0,1.0);
-  B.set_value(1,0,1.0);
-  B.set_value(2,0,0.0);
+  this->B.push_back(1.0);
+  this->B.push_back(1.0);
+  this->B.push_back(0.0);
   // C -------------
-  C.set_value(0,0,1.0);
-  C.set_value(1,0,-1.0);
-  C.set_value(2,0,0.0);
+  this->C.push_back(1.0);
+  this->C.push_back(-1.0);
+  this->C.push_back(0.0);
   // D -------------
-  D.set_value(0,0,-1.0);
-  D.set_value(1,0,-1.0);
-  D.set_value(2,0,0.0);
+  this->D.push_back(-1.0);
+  this->D.push_back(-1.0);
+  this->D.push_back(0.0);
 }
 
 float Matrix::get_value(int row, int col) const {

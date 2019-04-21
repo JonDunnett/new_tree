@@ -52,13 +52,13 @@ int main (int argc, char** argv) {
   MINU.set_value(1,1,   mcos(-10));
 
   
-  Rectangle rect;
-  Triangle tri;
+  Rectangle rect; // double free or corruption
+  //Triangle tri;   // Segfault
  
   // output rectangle on origin
-  rect = Rectangle();
-  tri = Triangle(rect.upper());
-  tri.output();/* either std::fout || filename * /);
+  //rect = Rectangle();
+  //tri = Triangle(rect.upper());
+  //tri.output();/* either std::fout || filename * /);
 
 /*
 // parsing output tree
