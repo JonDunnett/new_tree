@@ -2,6 +2,8 @@
 #define _CLASSES
 
 #include <vector>
+#include <iostream>
+#include <stdio.h>
 #include "functions.cpp"
 
 struct  matrix_size {
@@ -28,19 +30,19 @@ public:
 
 
 class Triangle {
-  std::vector<float>  A,B,C;  // represents 3 vertices
+  std::vector<float>  A,B,C, normal;   // represents 3 vertices
 public:
-  Triangle();                         // default ctor
-  ~Triangle();                        // defualt dtor
+  Triangle();                          // default ctor
+  ~Triangle();                         // defualt dtor
   Triangle(std::vector<float> p1,      // ctor given points
            std::vector<float> p2,
            std::vector<float> p3);
-  void calculate_normal(void);        // calculates normal
-  void output(/* output object */);   // outputs in stl format
+  void calculate_normal(void);         // calculates normal
+  void output(char * outfile);         // outputs in stl format
 };
 
 class Rectangle {
-  std::vector<float> A,B,C,D; // representing the four verticies 
+  std::vector<float> A,B,C,D; // representing the four vertices 
   // A--B
   // | /|
   // |/ |
@@ -229,13 +231,6 @@ Triangle Rectangle::lower(void) {
   return Triangle(this->B,this->C,this->D);
 }
 
-void Triangle::output(/* output object */) {
-// output the the points and normal in stl format
-// PRE : This triangle must be initialize by a rectangle
-// POST: Triangle data output to given obj in stl format
-
-}
-
 std::vector<float> mult(const Matrix M, const std::vector<float> V) {
 // matrix multiplication matrix * vector
 // PRE : Existing matrix M, vector V
@@ -261,7 +256,7 @@ void translate(Rectangle rect, const std::vector<Matrix> matrices) {
 // POST: Rectangle rect will be translated, this modifies the object! 
   Matrix* M; 
   for (short i=0;i<matrices.size();i++) {
-    rect.transform(matrices[i]);        
+    //rect.transform(matrices[i]);        
   }
 }
 
@@ -269,7 +264,12 @@ Triangle::Triangle(){
 // default ctor
 // PRE : NONE
 // POST: Object created
-
+  for(short i=0;i<3;i++) {
+    this->A[i]=i;
+    this->B[i]=i+3;
+    this->C[i]=i+6;
+    this->normal[i]=i+9;
+  }
 }
 
 Triangle::~Triangle(){
@@ -288,13 +288,37 @@ Triangle::Triangle(std::vector<float> p1, std::vector<float> p2, std::vector<flo
     this->B[i] = p2[i];
     this->C[i] = p3[i]; 
   }
+  //this->calculate_normal();
 }
 
  
-Rectangle::~Rectangle(){
+Rectangle::~Rectangle() {
 // defualt dtor
 // PRE : Existing Rectangle
 // POST: Rectangle destroyed
 
 }
+void Triangle::output(char * outfile) {
+// outputs in stl format
+// PRE : Normal calculated; Triangle init with valid vertices
+// POST: output to ostream in stl format 
+  FILE * ofp = fopen(outfile, "a");
+  fprintf(ofp, "facet normal %f %f %f\n", this->normal[0],this->normal[1],this->normal[2]);
+  fprintf(ofp, "\touter loop%s\n","");  
+  fprintf(ofp, "\t\tvertex %f %f %f\n", this->A[0],this->A[1],this->A[2]);  
+  fprintf(ofp, "\t\tvertex %f %f %f\n", this->B[0],this->B[1],this->B[2]);  
+  fprintf(ofp, "\t\tvertex %f %f %f\n", this->C[0],this->C[1],this->C[2]);  
+  fprintf(ofp, "\tendloop%s\n", "");  
+  fprintf(ofp, "endfacet%s\n",""); 
+  fclose(ofp); 
+}
+
+void Triangle::calculate_normal(void) {
+// calculates normal
+// PRE : Must have points initialized
+// POST: Normal calculated and vector set
+  
+  /* DO THIS NEXT */
+}
+
 #endif
