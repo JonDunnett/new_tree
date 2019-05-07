@@ -59,9 +59,9 @@ int main (int argc, char** argv) {
   Triangle tri;    
  
   // output rectangle on origin
-  //tri = rect.upper(); // Segfault
+  tri = rect.upper(); // Segfault
   tri.output("tree.stl");
-  //tri = rect.lower(); // Segfault
+  tri = rect.lower(); // Segfault
   tri.output("tree.stl");
 
 

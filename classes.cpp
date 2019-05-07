@@ -95,7 +95,7 @@ Matrix::Matrix(const Matrix& copy) {
   matrix_size copy_size = copy.get_size();
   this->size.rows = copy_size.rows;
   this->size.cols = copy_size.cols;
-  mem_alloc();
+  this->mem_alloc();
   for(short i=0;i<copy_size.rows;i++) {
     for(short j=0;j<copy_size.cols;j++) {
       this->set_value(i,j,copy.get_value(i,j));
@@ -110,7 +110,7 @@ Matrix::Matrix(const Matrix* copy) {
   matrix_size copy_size = copy->get_size();
   this->size.rows = copy->size.rows;
   this->size.cols = copy->size.cols;
-  mem_alloc();
+  this->mem_alloc();
   for(short i=0;i<copy_size.rows;i++) {
     for(short j=0;j<copy_size.cols;j++) {
       this->set_value(i,j,copy->get_value(i,j));
@@ -307,7 +307,7 @@ Triangle::Triangle(std::vector<float> p1, std::vector<float> p2, std::vector<flo
     this->B[i] = p2[i];
     this->C[i] = p3[i]; 
   }
-  //this->calculate_normal();
+  this->calculate_normal();
 }
 
  
@@ -336,8 +336,9 @@ void Triangle::calculate_normal(void) {
 // calculates normal
 // PRE : Must have points initialized
 // POST: Normal calculated and vector set
-  
-  /* DO THIS NEXT */
+  normal[0] = 1;
+  normal[1] = 1;
+  normal[2] = 1;
 }
 
 #endif
