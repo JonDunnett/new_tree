@@ -21,6 +21,7 @@ public:
   Matrix(int rows, int cols);                    // ctor defining # of rows/ cols
   Matrix(matrix_size size);                      // ctor defining # of rows/ cols
   Matrix(const Matrix& copy);                    // copy ctor
+  Matrix(const Matrix* copy);                    // copy ctor
   ~Matrix();                                     // default dtor
   Matrix* operator*(const Matrix& other);        // operator overload matrix multiplication
   matrix_size get_size(void) const;              // gets matrix_size struct
@@ -93,11 +94,29 @@ Matrix::Matrix(const Matrix& copy) {
 // POST: This matrix will be a copy of given matrix
   matrix_size copy_size = copy.get_size();
   this->size.rows = copy_size.rows;
-  this->size.cols = copy_size.rows;
+  this->size.cols = copy_size.cols;
   mem_alloc();
-
+  for(short i=0;i<copy_size.rows;i++) {
+    for(short j=0;j<copy_size.cols;j++) {
+      this->set_value(i,j,copy.get_value(i,j));
+    }
+  }
 }
 
+Matrix::Matrix(const Matrix* copy) {
+// Copy ctor takes pointer
+// PRE : Pointer points to existing matrix; MUST have values
+// POST: This matrix takes values of given matrix
+  matrix_size copy_size = copy->get_size();
+  this->size.rows = copy->size.rows;
+  this->size.cols = copy->size.cols;
+  mem_alloc();
+  for(short i=0;i<copy_size.rows;i++) {
+    for(short j=0;j<copy_size.cols;j++) {
+      this->set_value(i,j,copy->get_value(i,j));
+    }
+  }
+}
 Matrix::~Matrix() {
 // dtor
 // PRE : Matrix must have memory allocated for data

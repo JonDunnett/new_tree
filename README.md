@@ -3,6 +3,9 @@ rework of COMP_375 project
 
 This repository contains the code for a grammar defined generation of a tree 
 
+Command format:
+tree [# of generations] [grammar file]
+
 Files:
 * main.cpp - main function only 
 * functions.cpp - contains helper functions 
