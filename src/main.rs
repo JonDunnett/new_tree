@@ -4,7 +4,7 @@
 // SUMMARY : 
 // CREATOR : Jon Dunnett
 // EDITS   :
-// STATUS  : development  
+// STATUS  : figure out how to return json type   
 // -----------------------------------------------------------------------------
 
 // --- EXTERN ------------------------------------------------------------------
