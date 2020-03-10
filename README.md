@@ -1,3 +1,7 @@
+*_decided to turn this into a rust project as a learning experience_*
+
+*_has a lot of things going on so its a good candidate for learning_*
+
 # new_tree
 rework of COMP_375 project
 
