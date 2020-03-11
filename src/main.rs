@@ -12,12 +12,9 @@ extern crate json;
 // -----------------------------------------------------------------------------
 
 // --- USES --------------------------------------------------------------------
-use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
-use std::path::Path;
 use std::env;
-use std::collections::HashMap;
 use json::*;
 // -----------------------------------------------------------------------------
 
@@ -26,20 +23,51 @@ fn main () {
   let args: Vec<String> = env::args().collect();
   let iter_limit  = &args[1];
   let in_filename = &args[2];
+  
 
-  let mut G = read_grammar(in_filename.to_string());
+
+  let grammar = 
+    read_grammar(in_filename.to_string())
+      .expect("failed to open json") ;
+
+  let _iter_limit = 
+    iter_limit.parse::<i32>().unwrap() ;
+  for i in 0.._iter_limit {
+    println!("iter {}", i);
+  }
+
+  let f = File::open("");
+
 }
 
 
 // --- HELPER FUNCTIONS --------------------------------------------------------
 // just some functions to help out a little bit 
 
-fn read_grammar (infile_name : String) ->  Result {
+fn read_grammar (infile_name : String) 
+  -> std::result::Result<json::JsonValue, json::Error>  {
 // input filename as json with defined grammar 
 // PRE : existing string filename with relative file path 
 // POST: returns a json as a grammar 
-  let mut file = File::open(infile_name)?;
+  // try to open file 
+  let file = File::open(infile_name);
+
+  match file.is_ok() {
+    true  =>  true,
+    false =>  panic!("Error loading file")
+  };
+
+  let mut idk = file.unwrap();
+
+  // load into a string
   let mut contents = String::new();
-  file.read_to_string(&mut contents)?;
+  idk.read_to_string(&mut contents);
   json::parse(&mut contents)
 }
+
+/*
+fn init_file() -> std::result::Result<String, String> {
+  Ok
+
+}
+*/
