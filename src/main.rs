@@ -62,7 +62,7 @@ fn read_grammar (infile_name : String)
   // load into a string
   let mut contents = String::new();
   idk.read_to_string(&mut contents);
-  json::parse(&mut contents)
+  return json::parse(&mut contents);
 }
 
 /*
@@ -71,3 +71,16 @@ fn init_file() -> std::result::Result<String, String> {
 
 }
 */
+
+fn read_bytes(infile_name : String, outfile_name : String) {
+// reads bytes from input file -- outputs to output file 
+// PRE : given string representing the name of an existing file 
+// POST: transfers byte by byte infile -> outfile 
+  let f = File::open(infile_name)
+    .expect("Failed to open file");
+  let f = BufReader::new(f);
+  let mut count = 0;
+  for b in f.bytes() {
+    if b.ok() 
+  }
+}
