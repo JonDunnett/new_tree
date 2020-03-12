@@ -65,13 +65,6 @@ fn read_grammar (infile_name : String)
   return json::parse(&mut contents);
 }
 
-/*
-fn init_file() -> std::result::Result<String, String> {
-  Ok
-
-}
-*/
-
 fn read_bytes(infile_name : String, outfile_name : String) {
 // reads bytes from input file -- outputs to output file 
 // PRE : given string representing the name of an existing file 
