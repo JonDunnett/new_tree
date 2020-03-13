@@ -63,7 +63,11 @@ fn read_grammar (infile_name : String)
   return json::parse(&mut contents);
 }
 
-fn read_bytes(infile_name : String, outfile_name : String) {
+fn read_bytes(
+  infile_name : String,
+  outfile_name : String,
+  grammar : json::JsonValue 
+) {
 // reads bytes from input file -- outputs to output file 
 // PRE : given string representing the name of an existing file 
 // POST: transfers byte by byte infile -> outfile 
@@ -72,6 +76,14 @@ fn read_bytes(infile_name : String, outfile_name : String) {
   let f = BufReader::new(f);
   let mut count = 0;
   for b in f.bytes() {
-    if b.ok() 
+    if b.ok() {
+      let mut cur_char : String = b;
+      if /* cur_char is caps */ {
+        let output_string = grammar.get(cur_char);
+      } else {
+        let output_string = cur_char;
+      }
+      // output output string 
+    }
   }
 }
