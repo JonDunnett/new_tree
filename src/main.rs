@@ -3,7 +3,7 @@
 // SUMMARY : 
 // CREATOR : Jon Dunnett
 // EDITS   :
-// STATUS  : figure out how to return json type   
+// STATUS  : figure out how to output file 
 // -----------------------------------------------------------------------------
 
 // --- EXTERN ------------------------------------------------------------------
