@@ -1,4 +1,3 @@
-
 // main.rst
 // --- HEADER ------------------------------------------------------------------
 // SUMMARY : 
@@ -39,7 +38,6 @@ fn main () {
   let f = File::open("");
 
 }
-
 
 // --- HELPER FUNCTIONS --------------------------------------------------------
 // just some functions to help out a little bit 
