@@ -13,6 +13,7 @@ extern crate json;
 // --- USES --------------------------------------------------------------------
 use std::fs::File;
 use std::io::prelude::*;
+use std::io::BufReader;
 use std::env;
 use json::*;
 // -----------------------------------------------------------------------------
@@ -71,19 +72,24 @@ fn read_bytes(
 // reads bytes from input file -- outputs to output file 
 // PRE : given string representing the name of an existing file 
 // POST: transfers byte by byte infile -> outfile 
-  let f = File::open(infile_name)
-    .expect("Failed to open file");
-  let f = BufReader::new(f);
+  let mut ouf = File::create(outfile_name)
+    .expect("Failed to open out file ");
+  let inf = File::open(infile_name)
+    .expect("Failed to open in file");
+  let inf = BufReader::new(inf);
   let mut count = 0;
-  for b in f.bytes() {
-    if b.ok() {
-      let mut cur_char : String = b;
-      if /* cur_char is caps */ {
-        let output_string = grammar.get(cur_char);
+  let mut output_string = String::new();
+  for b in inf.bytes() {
+    if b.is_ok() {
+      let mut cur_char : String = b.unwrap().to_string();
+      if true {
+        output_string = grammar.get(cur_char);
       } else {
-        let output_string = cur_char;
+        output_string = cur_char.to_string();
       }
       // output output string 
+      ouf.write_all(output_string.to_string())
+        .expect("failed to write to file");
     }
   }
 }
